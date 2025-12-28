@@ -21,5 +21,7 @@ urlpatterns = [
     # Allauth (email + Google login)
     path('accounts/', include('allauth.urls')),
     # Your app URLs
-    path('', include(('accounts.urls', 'accounts'), namespace='accounts')),
+    path('', include(('accounts.urls'), namespace='accounts')),
+    path('message/',include('message.urls')),
+    path('connectpro/', include('connectpro.urls')),
 ]

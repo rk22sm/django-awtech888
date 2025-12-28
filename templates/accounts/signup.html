@@ -1,18 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup</title>
-</head>
-<body>
-    <h2>Signup</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sign Up</button>
+{% extends 'base/whole.html' %}
 
-    </form>
-    --------------
-</body>
-</html>
+{% block title %}Sign Up{% endblock %}
+{% load socialaccount %}
+{% block content %}
+<div class="mt-20">
+   <h2 class="text-2xl font-semibold text-center font-bold mb-6 text-black-800">ConnectPro</h2>
+</div>
+
+<div class="max-w-md w-full mt-5 p-6 bg-white shadow-lg rounded-lg">
+  <form method="post" action="{% url 'accounts:account_login'%}">
+      {% csrf_token %}
+      <div class="mb-4">
+         <h2 class="text-2xl font-semibold text-left text-black-800">Create an account</h2>
+         <h3 class="text-sm text-left font-semibold mb-6 text-gray-500">Sign up to get started with ConnectPro</h3>
+
+         <!-- Google Login Button -->
+         <a href="{% provider_login_url 'google' process='login' %}" class="group mb-3 inline-flex w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-1 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-emerald-200 hover:text-emerald-700">
+          <span class="inline-flex items-center justify-center   text-2xl ">G</span>
+          <span>Continue with Google</span>
+         </a>
+
+         <!-- Separator Line -->
+         <div class="relative my-3">
+            <div class="absolute inset-0 flex items-center">
+                <span class="w-full border-t border-gray-300"></span>
+            </div>
+            <div class="relative flex justify-center text-xs uppercase">
+              <span class="bg-white px-4 text-gray-500">Or continue with</span>
+            </div>
+         </div>
+
+
+         <!-- username field -->
+         <div class="space-y-2 mb-6">
+            <label for="username" class="text-sm font-semibold text-slate-700">Full Name</label>
+            <div class="relative">
+                <input type="text" 
+                class="flex h-10 w-full rounded-md border border-input bg-background px-16 py-2 text-base ring-offset-background focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 placeholder:text-muted-foreground" 
+                id="username" placeholder="james" required=""   >
+            </div>
+            {% if form.username.errors %}
+              <p class="text-sm text-red-600">
+                {% for error in form.username.errors %}{{ error }}{% if not forloop.last %}<br>{% endif %}{% endfor %}
+              </p>
+            {% endif %}
+          </div>
+         <!-- Email Field -->
+         <div class="space-y-2 mb-6 ">
+            <label class="text-sm font-semibold text-slate-700">Email</label>
+            <div class="relative">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail bg-gray absolute left-3 top-3 h-4 w-4 text-muted-foreground"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                <input type="email" 
+                class="flex h-10 w-full rounded-md border border-input bg-background px-16 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pl-9" 
+                id="email" placeholder="name@example.com" required="" value="">
+            </div>
+            
+            {% if form.login.errors %}
+              <p class="text-sm text-red-600">
+                {% for error in form.login.errors %}{{ error }}{% if not forloop.last %}<br>{% endif %}{% endfor %}
+              </p>
+            {% endif %}
+          </div>
+
+          <!-- Password Field -->
+          <div class="space-y-2 mb-6">
+            <div class="flex items-center justify-between">
+              <label class="text-sm font-semibold text-slate-700">Password</label>
+            </div>
+            <div class="relative">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock absolute left-3 top-3 h-4 w-4 text-muted-foreground">
+                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <input type="password" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pl-9"
+             id="password" 
+             placeholder="••••••••" 
+             required=""
+              value="rstar116">
+            <div class="flex items-center justify-between">
+              <a class="text-sm font-semibold text-emerald-600 hover:text-emerald-700" href="{% url 'account_reset_password' %}">Forgot password?</a>
+            </div>
+            {% if form.password.errors %}
+              <p class="text-sm text-red-600">
+                {% for error in form.password.errors %}{{ error }}{% if not forloop.last %}<br>{% endif %}{% endfor %}
+              </p>
+            {% endif %}
+        </div>
+
+          {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+          {% endif %}
+
+           <!-- Role Selection: Client or Developer -->
+        <div class="space-y-2 mb-6">
+            <label class="text-sm font-semibold text-slate-700">I am a</label>
+            <div class="flex items-center gap-4">
+            <div class="flex items-center">
+                <input type="radio" name="role" id="client" value="client" class="h-4 w-4 text-blue-500 border-gray-300 focus:ring-2 focus:ring-blue-500" required>
+                <label for="client" class="ml-2 text-sm text-slate-700">Client (Looking for developers)</label>
+            </div>
+            <div class="flex items-center">
+                <input type="radio" name="role" id="developer" value="developer" class="h-4 w-4 text-blue-500 border-gray-300 focus:ring-2 focus:ring-blue-500" required>
+                <label for="developer" class="ml-2 text-sm text-slate-700">Developer (Looking for projects)</label>
+            </div>
+            </div>
+        </div>
+          <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">Sign up</button>
+      </form>
+
+      <!-- Sign In Link -->
+      <div class="text-center mt-4">
+        <p class="text-sm text-gray-600">Already have an account? <a href="{% url 'accounts:account_login' %}" class="text-green-600 hover:underline">Sign in here!</a></p>
+      </div>
+</div>
+{% endblock %}

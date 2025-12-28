@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    # other Django apps
+    "tailwind",
+    "theme",
      # allauth
     'allauth',
     'allauth.account',
@@ -48,8 +51,10 @@ INSTALLED_APPS = [
 
     # local apps
     'accounts',
+    'message',
+    'connectpro',
 ]
-
+TAILWIND_APP_NAME = "theme"
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
@@ -66,6 +71,8 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+SOCIALACCOUNT_AUTO_SIGNUP = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -129,15 +136,15 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_AUTHENTICATED_REDIRECT_URL = '/'  # Redirect after login
 LOGIN_REDIRECT_URL = '/profile/' # Redirect after successful login
-ACCOUNT_LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
+ACCOUNT_LOGOUT_REDIRECT_URL = '/login'  # Redirect after logout
 LOGOUT_REDIRECT_URL = '/login'
 ACCOUNT_LOGIN_METHODS = {"email", "username"}
-ACCOUNT_SIGNUP_FIELDS = ["email*", "username*", "password1*", "password2*"]
+ACCOUNT_SIGNUP_FIELDS = ["email*", "username*", "password1*"]
 ACCOUNT_FORMS = {
     "login": "accounts.form.CustomLoginForm",
     "signup": "accounts.form.CustomSignupForm",
 }
-
+ACCOUNT_SIGNUP_REDIRECT_URL = '/profile/'
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
@@ -175,3 +182,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'

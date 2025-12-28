@@ -1,0 +1,115 @@
+{% extends "base/whole.html" %}
+{% load socialaccount %}
+
+{% block body_class %}auth-page{% endblock %}
+
+{% block content %}
+
+  <div class="auth-shell">
+    <div class="auth-logo">
+      <div class="brand" style="justify-content:center;">
+        <div class="brand-icon">👥</div>
+        ConnectPro
+      </div>
+    </div>
+
+    <div class="auth-card">
+      <div class="auth-title">Create an account</div>
+      <div class="auth-subtitle">
+        Join thousands of entrepreneurs networking every day.
+      </div>
+
+      <a href="{% provider_login_url 'google' process='signup' %}" class="auth-google-btn">
+        <span>G</span>
+        <span>Continue with Google</span>
+      </a>
+
+      <div class="auth-divider">OR CONTINUE WITH</div>
+
+      <form method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+          <div class="field-error">
+            {% for error in form.non_field_errors %}{{ error }}{% if not forloop.last %}<br>{% endif %}{% endfor %}
+          </div>
+        {% endif %}
+
+        {% if form.username %}
+          <div class="field">
+            <div class="field-label">{{ form.username.label|default:"Username" }}</div>
+            {{ form.username }}
+            {% if form.username.errors %}
+              <div class="field-error">
+                {% for error in form.username.errors %}{{ error }}{% if not forloop.last %}<br>{% endif %}{% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if form.email %}
+          <div class="field">
+            <div class="field-label">{{ form.email.label|default:"Email" }}</div>
+            {{ form.email }}
+            {% if form.email.errors %}
+              <div class="field-error">
+                {% for error in form.email.errors %}{{ error }}{% if not forloop.last %}<br>{% endif %}{% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if form.password1 %}
+          <div class="field">
+            <div class="field-label">{{ form.password1.label|default:"Password" }}</div>
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+              <div class="field-error">
+                {% for error in form.password1.errors %}{{ error }}{% if not forloop.last %}<br>{% endif %}{% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if form.password2 %}
+          <div class="field">
+            <div class="field-label">{{ form.password2.label|default:"Confirm password" }}</div>
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+              <div class="field-error">
+                {% for error in form.password2.errors %}{{ error }}{% if not forloop.last %}<br>{% endif %}{% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% for field in form %}
+          {% if field.name != "username" and field.name != "email" and field.name != "password1" and field.name != "password2" %}
+            <div class="field">
+              <div class="field-label">{{ field.label }}</div>
+              {{ field }}
+              {% if field.errors %}
+                <div class="field-error">
+                  {% for error in field.errors %}{{ error }}{% if not forloop.last %}<br>{% endif %}{% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+
+        {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+        {% endif %}
+
+        <button type="submit" class="btn btn-primary btn-pill auth-primary-btn">
+          Create account
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        Already have an account?
+        <a href="{% url 'account_login' %}">Sign in</a>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

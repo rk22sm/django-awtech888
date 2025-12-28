@@ -21,7 +21,7 @@ class CustomLoginForm(LoginForm):
             )
         if "password" in self.fields:
             self.fields["password"].widget.attrs.update(
-                {"class": input_classes, "placeholder": "••••••••"}
+                {"class": input_classes, "placeholder": "•••••"}
             )
         if "remember" in self.fields:
             self.fields["remember"].widget.attrs.setdefault(
@@ -65,10 +65,9 @@ class CustomSignupForm(SignupForm):
             self.fields["email"].widget.attrs.setdefault(
                 "placeholder", "name@example.com"
             )
-        if "password1" in self.fields:
-            self.fields["password1"].widget.attrs.setdefault("placeholder", "••••••••")
-        if "password2" in self.fields:
-            self.fields["password2"].widget.attrs.setdefault("placeholder", "••••••••")
+        if "password" in self.fields:
+            self.fields["password"].widget.attrs.setdefault("placeholder", "••••••••")
+       
 
     def save(self, request):
         user = super().save(request)

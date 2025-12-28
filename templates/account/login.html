@@ -1,0 +1,106 @@
+{% extends "base/whole.html" %}
+{% load socialaccount %}
+
+{% block body_class %}auth-page{% endblock %}
+
+{% block content %}
+
+  <div class="auth-shell">
+    <div class="auth-logo">
+      <div class="brand" style="justify-content:center;">
+        <div class="brand-icon">👥</div>
+        ConnectPro
+      </div>
+    </div>
+
+    <div class="auth-card">
+      <div class="auth-title">Welcome back</div>
+      <div class="auth-subtitle">
+        Sign in to your account to continue.
+      </div>
+
+      <a href="{% provider_login_url 'google' process='login' %}" class="auth-google-btn">
+        <span>G</span>
+        <span>Continue with Google</span>
+      </a>
+
+      <div class="auth-divider">OR CONTINUE WITH</div>
+
+      <form method="post" action="{% url 'account_login' %}">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+          <div class="field-error">
+            {% for error in form.non_field_errors %}{{ error }}{% if not forloop.last %}<br>{% endif %}{% endfor %}
+          </div>
+        {% endif %}
+
+        <div class="field">
+          <div class="field-label">Email</div>
+          <input
+            class="field-input"
+            type="email"
+            name="{{ form.login.html_name }}"
+            value="{{ form.login.value|default_if_none:'' }}"
+            placeholder="name@example.com"
+            autocomplete="email"
+            required
+          />
+          {% if form.login.errors %}
+            <div class="field-error">
+              {% for error in form.login.errors %}{{ error }}{% if not forloop.last %}<br>{% endif %}{% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="field">
+          <div class="field-label">Password</div>
+          <input
+            class="field-input"
+            type="password"
+            name="{{ form.password.html_name }}"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            required
+          />
+          {% if form.password.errors %}
+            <div class="field-error">
+              {% for error in form.password.errors %}{{ error }}{% if not forloop.last %}<br>{% endif %}{% endfor %}
+            </div>
+          {% endif %}
+          <div class="field-help">
+            <a href="{% url 'account_reset_password' %}" style="text-decoration:none;color:var(--accent-dark);">
+              Forgot password?
+            </a>
+          </div>
+        </div>
+
+        {% if form.remember %}
+          <div class="field" style="display:flex;align-items:center;gap:8px;">
+            <input
+              id="remember"
+              type="checkbox"
+              name="{{ form.remember.html_name }}"
+              {% if form.remember.value %}checked{% endif %}
+              style="width:auto;"
+            />
+            <label for="remember" class="field-label" style="margin:0;">Remember me</label>
+          </div>
+        {% endif %}
+
+        {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+        {% endif %}
+
+        <button type="submit" class="btn btn-primary btn-pill auth-primary-btn">
+          Sign in
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        Don’t have an account?
+        <a href="{% url 'account_signup' %}">Sign up</a>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
