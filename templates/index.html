@@ -4,16 +4,326 @@
 
 {% block content %}
 
-<div class="mt-20 inline-flex items-center">
-    <div class="w-10 h-10 rounded-lg bg-green-400 flex items-center justify-center">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users w-6 h-6 text-primary-foreground"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-    </div>
-   <span class="text-2xl  font-semibold text-center font-blod  text-black-800">ConnectPro</span>
-</div>
+
 
 <div class="min-h-screen bg-background">
-    <header class="border-b sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50"><div class="container mx-auto px-4 h-16 flex items-center justify-between"><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users w-5 h-5 text-primary-foreground"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div><span class="text-xl font-bold">ConnectPro</span></div><nav class="hidden md:flex items-center gap-6"><a href="#features" class="text-sm font-medium hover:text-primary transition-colors">Features</a><a href="#pricing" class="text-sm font-medium hover:text-primary transition-colors">Pricing</a><a href="#about" class="text-sm font-medium hover:text-primary transition-colors">About</a></nav><div class="flex items-center gap-3"><a href="/login"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">Login</button></a><a href="/signup"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">Get Started</button></a></div></div></header>
+    <header
+        class="border-b sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 ">
+                <div class="w-8 h-8 rounded-lg bg-[#1dc9c9] flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-users w-5 h-5 text-primary-foreground text-white">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <span class="text-xl font-bold text-left">ConnectPro</span>
+            </div>
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="#features" class="text-sm font-medium hover:text-primary ">Features</a>
+                <a href="#pricing" class="text-sm font-medium hover:text-primary transition-colors">Pricing</a>
+                <a href="#about" class="text-sm font-medium hover:text-primary  transition-colors">About</a>
+            </nav>
+            <div class="flex items-center gap-3">
+                <a href="/login">
+                    <button
+                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">Login</button>
+                </a>
+                <a href="/signup">
+                    <button
+                        class=" bg-[#1dc9c9] text-white  items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">Get
+                        Started</button>
+                </a>
+            </div>
+        </div>
+    </header>
+    <section class="container mx-auto px-4 py-20 md:py-32">
+        <div class="max-w-4xl mx-auto text-center space-y-8">
+            <div
+                class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs bg-green-400 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-zap w-3 h-3 mr-1 ">
+                    <path
+                        d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z">
+                    </path>
+                </svg>Join 10,000+ entrepreneurs
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tight">Network smarter, not harder</h1>
+            <p class="text-xl text-gray-500  max-w-2xl mx-auto">Connect with the right people at the right time. A
+                modern networking platform built for entrepreneurs who value authentic connections.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/signup">
+                    <button
+                        class="inline-flex items-center justify-center text-white bg-[#1dc9c9] gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-md px-8 w-full sm:w-auto">Start
+                        Connecting Free</button>
+                </a>
+                <button
+                    class="inline-flex items-center justify-center  gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 rounded-md px-8 w-full sm:w-auto">Watch
+                    Demo</button>
+            </div>
+        </div>
+    </section>
+    <section id="features" class="container mx-auto px-4 py-20 bg-accent/30">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Everything you need to grow</h2>
+                <p class="text-muted-foreground text-lg">Simple, powerful tools for meaningful connections</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+                    <div class="p-6 pt-6 space-y-4">
+                        <div class="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide  text-green-500 w-6 h-6 text-primary">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Smart Matching</h3>
+                        <p class="text-muted-foreground text-gray-500">Connect with developers or clients based on your
+                            role. Find the
+                            perfect match for your next project.</p>
+                    </div>
+                </div>
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+                    <div class="p-6 pt-6 space-y-4">
+                        <div class="w-12 h-12 rounded-lg bg-red-500/10 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide text-red-500 lucide-message-square w-6 h-6 text-secondary">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Real-time Chat</h3>
+                        <p class="text-muted-foreground text-gray-500">Instant messaging with notifications. Never miss
+                            an opportunity
+                            to connect.</p>
+                    </div>
+                </div>
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+                    <div class="p-6 pt-6 space-y-4">
+                        <div class="w-12 h-12 rounded-lg bg-green-400/10 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="text-blue-500 lucide lucide-shield w-6 h-6 text-primary">
+                                <path
+                                    d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Quality Control</h3>
+                        <p class="text-muted-foreground text-gray-500">Daily connection limits ensure meaningful
+                            interactions, not
+                            spam.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <section id="pricing" class="container mx-auto px-4 py-20">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Simple, transparent pricing</h2>
+                <p class="text-muted-foreground text-lg text-gray-500">Choose the plan that fits your networking needs
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+                    <div class="p-6 pt-6 space-y-6">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Free</h3>
+                            <p class="text-muted-foreground text-gray-500">Perfect for getting started</p>
+                        </div>
+                        <div class="text-4xl font-bold">$0</div>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-2">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-primary/10 flex items-center bg-[#1dc9c9]/20 justify-center">
+                                    ✓</div>
+                                <span>2 connections per day</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-primary/10 flex items-center bg-[#1dc9c9]/20 justify-center">
+                                    ✓</div>
+                                <span>Basic profile</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-primary/10 flex items-center bg-[#1dc9c9]/20 justify-center">
+                                    ✓</div>
+                                <span>Real-time messaging</span>
+                            </li>
+                        </ul>
+                        <button
+                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full">Get
+                            Started</button>
+                    </div>
+                </div>
+                <div class="rounded-lg border bg-card text-card-foreground border-primary shadow-lg scale-105">
+                    <div class="p-6 pt-6 space-y-6">
+                        <div>
+                            <div
+                                class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground hover:bg-primary/80 mb-2">
+                                Most Popular</div>
+                            <h3 class="text-2xl font-bold mb-2">Plus</h3>
+                            <p class="text-muted-foreground text-gray-500">For active networkers</p>
+                        </div>
+                        <div class="text-4xl font-bold">$19<span class="text-lg text-muted-foreground">/mo</span></div>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-2">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-primary/10 flex items-center bg-[#1dc9c9]/20 justify-center">
+                                    ✓</div>
+                                <span>5 connections per day</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-primary/10 flex items-center bg-[#1dc9c9]/20 justify-center">
+                                    ✓</div>
+                                <span>Enhanced profile</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-primary/10 flex items-center bg-[#1dc9c9]/20 justify-center">
+                                    ✓</div>
+                                <span>Priority support</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-primary/10 flex items-center bg-[#1dc9c9]/20 justify-center">
+                                    ✓</div>
+                                <span>Advanced analytics</span>
+                            </li>
+                        </ul><button
+                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 text-white bg-[#1dc9c9] w-full">Upgrade
+                            to Plus</button>
+                    </div>
+                </div>
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+                    <div class="p-6 pt-6 space-y-6">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Pro</h3>
+                            <p class="text-muted-foreground text-gray-500">For power networkers</p>
+                        </div>
+                        <div class="text-4xl font-bold">$49<span class="text-lg text-muted-foreground">/mo</span></div>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-2">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-primary/10 flex items-center bg-[#1dc9c9]/20 justify-center">
+                                    ✓</div>
+                                <span>Unlimited connections</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-primary/10 flex items-center bg-[#1dc9c9]/20 justify-center">
+                                    ✓</div>
+                                <span>Premium profile badge</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-primary/10 flex items-center bg-[#1dc9c9]/20 justify-center">
+                                    ✓</div>
+                                <span>24/7 priority support</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <div
+                                    class="w-5 h-5 rounded-full bg-primary/10 flex items-center bg-[#1dc9c9]/20 justify-center">
+                                    ✓</div>
+                                <span>Advanced features</span>
+                            </li>
+                        </ul><button
+                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full">Go
+                            Pro</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+    <footer class="border-t py-12 ">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg bg-[#1dc9c9] flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-users w-5 h-5 text-white">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xl text-blue-500 font-bold">ConnectPro</span>
+                    </div>
+                    <p class="text-sm text-gray-500">The modern networking platform for entrepreneurs.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4 text-blue-500">Product</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li>
+                            <a href="#" class="hover:text-gray-700 text-gray-500">Features</a>
+                        </li>
+                        <li>
+                            <a href="#" class="hover:text-gray-700 text-gray-500">Pricing</a>
+                        </li>
+                        <li><a href="#" class="hover:text-gray-700 text-gray-500">Security</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4 text-blue-500">Company</h4>
+                    <ul class="space-y-2 text-sm text-blue-500">
+                        <li><a href="#" class="hover:text-gray-700 text-gray-500">About</a></li>
+                        <li><a href="#" class="hover:text-gray-700 text-gray-500">Blog</a></li>
+                        <li><a href="#" class="hover:text-gray-700 text-gray-500">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4 text-blue-500">Legal</h4>
+                    <ul class="space-y-2 text-sm text-gray-500 " >
+                        <li>
+                            <a href="#" class="hover:text-gray-700 text-gray-500">Privacy</a>
+                        </li>
+                        <li>
+                            <a href="#" class="hover:text-gray-700 text-gray-500">Terms</a>
+                        </li>
+                        <li>
+                            <a href="#" class="hover:text-gray-700 text-gray-500">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t text-center text-sm text-gray-500">
+                <p>© <span id="year"></span> ConnectPro. All rights reserved.</p>
+
+            </div>
+
+        </div>
+
+    </footer>
 </div>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 
 {% endblock content %}
