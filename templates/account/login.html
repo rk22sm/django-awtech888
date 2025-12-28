@@ -5,26 +5,35 @@
 
 {% block content %}
 
-  <div class="auth-shell">
-    <div class="auth-logo">
-      <div class="brand" style="justify-content:center;">
-        <div class="brand-icon">👥</div>
-        ConnectPro
-      </div>
+<div class="mt-20 inline-flex items-center">
+    <div class="w-10 h-10 rounded-lg bg-green-400 flex items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users w-6 h-6 text-primary-foreground"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
     </div>
+   <span class="text-2xl  font-semibold text-center font-blod  text-black-800">ConnectPro</span>
+</div>
 
-    <div class="auth-card">
-      <div class="auth-title">Welcome back</div>
-      <div class="auth-subtitle">
+    <div class="max-w-md w-full  mt-5 p-6 bg-white shadow-lg rounded-lg">
+      <div class="text-2xl font-semibold text-left text-black-800">Welcome back</div>
+      <div class="text-sm text-left font-semibold mb-6 text-gray-500">
         Sign in to your account to continue.
       </div>
 
-      <a href="{% provider_login_url 'google' process='login' %}" class="auth-google-btn">
-        <span>G</span>
-        <span>Continue with Google</span>
+      <a href="{% provider_login_url 'google' process='login' %}" class="group mb-3 inline-flex w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-1 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-emerald-200 hover:text-emerald-700">
+        <span class="inline-flex items-center justify-center   text-2xl ">G</span>
+          <span>Continue with Google</span>
       </a>
 
-      <div class="auth-divider">OR CONTINUE WITH</div>
+      <div class="relative my-3">
+        <!-- Horizontal Line -->
+            <div class="absolute inset-0 flex items-center">
+                <span class="w-full border-t border-gray-300"></span>
+            </div>
+    
+            <!-- Text with Background and Padding -->
+            <div class="relative flex justify-center text-xs uppercase">
+              <span class="bg-white px-4 text-gray-500">Or continue with</span>
+            </div>
+        </div>
 
       <form method="post" action="{% url 'account_login' %}">
         {% csrf_token %}
@@ -35,17 +44,21 @@
           </div>
         {% endif %}
 
-        <div class="field">
-          <div class="field-label">Email</div>
-          <input
-            class="field-input"
-            type="email"
-            name="{{ form.login.html_name }}"
-            value="{{ form.login.value|default_if_none:'' }}"
-            placeholder="name@example.com"
-            autocomplete="email"
-            required
-          />
+         <div class="space-y-2 mb-6 ">
+          <label class="text-sm font-semibold text-slate-700">Email</label>
+          <div class="relative">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail bg-gray absolute left-3 top-3 h-4 w-4 text-muted-foreground"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                <input
+                    class="flex h-10 w-full rounded-md border border-input bg-background px-16 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pl-9"
+                    type="email"
+                    name="{{ form.login.html_name }}"
+                    value="{{ form.login.value|default_if_none:'' }}"
+                    placeholder="xxx@xxxxx.com"
+                    autocomplete="email"
+                    required
+                 />
+            </div>
+        
           {% if form.login.errors %}
             <div class="field-error">
               {% for error in form.login.errors %}{{ error }}{% if not forloop.last %}<br>{% endif %}{% endfor %}
@@ -53,53 +66,49 @@
           {% endif %}
         </div>
 
-        <div class="field">
-          <div class="field-label">Password</div>
-          <input
-            class="field-input"
-            type="password"
-            name="{{ form.password.html_name }}"
-            placeholder="••••••••"
-            autocomplete="current-password"
-            required
-          />
+       <div class="space-y-2 mb-6">
+            <div class="flex items-center justify-between">
+              <label class="text-sm font-semibold text-slate-700">Password</label>
+            </div>
+            <div class="relative">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock absolute left-3 top-3 h-4 w-4 text-muted-foreground">
+                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <input
+                    class="flex h-10 w-full rounded-md border border-input bg-background px-16 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pl-9"
+                    type="password"
+                    name="{{ form.password.html_name }}"
+                    placeholder="••••••••"
+                    autocomplete="current-password"
+                    required
+                />
+            </div>
+          
           {% if form.password.errors %}
             <div class="field-error">
               {% for error in form.password.errors %}{{ error }}{% if not forloop.last %}<br>{% endif %}{% endfor %}
             </div>
           {% endif %}
-          <div class="field-help">
-            <a href="{% url 'account_reset_password' %}" style="text-decoration:none;color:var(--accent-dark);">
+          <div class="flex items-center justify-between">
+            <a class="text-sm font-semibold text-emerald-600 hover:text-emerald-700" href="{% url 'account_reset_password' %}">
               Forgot password?
             </a>
           </div>
         </div>
 
-        {% if form.remember %}
-          <div class="field" style="display:flex;align-items:center;gap:8px;">
-            <input
-              id="remember"
-              type="checkbox"
-              name="{{ form.remember.html_name }}"
-              {% if form.remember.value %}checked{% endif %}
-              style="width:auto;"
-            />
-            <label for="remember" class="field-label" style="margin:0;">Remember me</label>
-          </div>
-        {% endif %}
+        
 
         {% if redirect_field_value %}
           <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
         {% endif %}
 
-        <button type="submit" class="btn btn-primary btn-pill auth-primary-btn">
+        <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
           Sign in
         </button>
       </form>
 
-      <div class="auth-footer">
-        Don’t have an account?
-        <a href="{% url 'account_signup' %}">Sign up</a>
+    <div class="text-center mt-4">
+        <p class="text-sm text-gray-600">Don't have an account?
+        <a href="{% url 'account_signup' %}" class="text-green-600 hover:underline">Sign up</a></p>
       </div>
     </div>
   </div>

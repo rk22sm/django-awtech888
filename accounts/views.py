@@ -6,13 +6,13 @@ from .form import CustomLoginForm, CustomSignupForm
 from django.urls import reverse_lazy
 
 # Create your views here.
-def home(request):  
-    return HttpResponse("hello")
+def index(request):  
+   return render(request, 'index.html')
 
 class CustomLoginView(LoginView):
     #template_name = 'account/login.html'
     def get_success_url(self):
-        return reverse_lazy('profile')
+        return reverse_lazy('connectpro:profile')
 
 class CustomSignupView(SignupView):
     template_name = 'account/signup.html'

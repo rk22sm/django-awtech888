@@ -5,26 +5,35 @@
 
 {% block content %}
 
-  <div class="auth-shell">
-    <div class="auth-logo">
-      <div class="brand" style="justify-content:center;">
-        <div class="brand-icon">👥</div>
-        ConnectPro
-      </div>
+<div class="mt-20 inline-flex items-center">
+    <div class="w-10 h-10 rounded-lg bg-green-400 flex items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users w-6 h-6 text-primary-foreground"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
     </div>
+   <span class="text-2xl  font-semibold text-center font-blod  text-black-800">ConnectPro</span>
+</div>
 
-    <div class="auth-card">
-      <div class="auth-title">Create an account</div>
-      <div class="auth-subtitle">
+    <div class="max-w-md w-full mt-5 p-6 bg-white shadow-lg rounded-lg">
+      <div class="text-2xl font-semibold text-left text-black-800">Create an account</div>
+      <div class="text-sm text-left font-semibold mb-6 text-gray-500">
         Join thousands of entrepreneurs networking every day.
       </div>
 
-      <a href="{% provider_login_url 'google' process='signup' %}" class="auth-google-btn">
-        <span>G</span>
+      <a href="{% provider_login_url 'google' process='signup' %}"  class="group mb-3 inline-flex w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-1 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-emerald-200 hover:text-emerald-700">
+        <span class="inline-flex items-center justify-center   text-2xl ">G</span>
         <span>Continue with Google</span>
       </a>
 
-      <div class="auth-divider">OR CONTINUE WITH</div>
+        <div class="relative my-3">
+        <!-- Horizontal Line -->
+            <div class="absolute inset-0 flex items-center">
+                <span class="w-full border-t border-gray-300"></span>
+            </div>
+    
+            <!-- Text with Background and Padding -->
+            <div class="relative flex justify-center text-xs uppercase">
+              <span class="bg-white px-4 text-gray-500">Or continue with</span>
+            </div>
+        </div>
 
       <form method="post" action="{% url 'account_signup' %}">
         {% csrf_token %}
@@ -37,7 +46,7 @@
 
         {% if form.username %}
           <div class="field">
-            <div class="field-label">{{ form.username.label|default:"Username" }}</div>
+            <div class="text-sm font-semibold text-slate-700">Full Name</div>
             {{ form.username }}
             {% if form.username.errors %}
               <div class="field-error">
@@ -48,8 +57,8 @@
         {% endif %}
 
         {% if form.email %}
-          <div class="field">
-            <div class="field-label">{{ form.email.label|default:"Email" }}</div>
+          <div class="field mt-5">
+            <div class="text-sm font-semibold text-slate-700"">{{ form.email.label|default:"Email" }}</div>
             {{ form.email }}
             {% if form.email.errors %}
               <div class="field-error">
@@ -60,8 +69,8 @@
         {% endif %}
 
         {% if form.password1 %}
-          <div class="field">
-            <div class="field-label">{{ form.password1.label|default:"Password" }}</div>
+          <div class="field mt-5">
+            <div class="text-sm font-semibold text-slate-700">{{ form.password1.label|default:"Password" }}</div>
             {{ form.password1 }}
             {% if form.password1.errors %}
               <div class="field-error">
@@ -73,7 +82,7 @@
 
         {% if form.password2 %}
           <div class="field">
-            <div class="field-label">{{ form.password2.label|default:"Confirm password" }}</div>
+            <div class="text-sm font-semibold text-slate-700">{{ form.password2.label|default:"Confirm password" }}</div>
             {{ form.password2 }}
             {% if form.password2.errors %}
               <div class="field-error">
@@ -85,9 +94,13 @@
 
         {% for field in form %}
           {% if field.name != "username" and field.name != "email" and field.name != "password1" and field.name != "password2" %}
-            <div class="field">
-              <div class="field-label">{{ field.label }}</div>
+            <div class="field mt-5 mb-6">
+              <div class="text-sm font-semibold text-slate-700">{{ field.label }}</div>
               {{ field }}
+                    <!-- <input type="radio" id="contactChoice1" name="contact" value="Developer"/>
+                    <label for="contactChoice1">Developer</label>
+                    <input type="radio" id="contactChoice2" name="contact" value="Client" />
+                    <label for="contactChoice2">Client</label> -->
               {% if field.errors %}
                 <div class="field-error">
                   {% for error in field.errors %}{{ error }}{% if not forloop.last %}<br>{% endif %}{% endfor %}
@@ -96,20 +109,22 @@
             </div>
           {% endif %}
         {% endfor %}
-
+       
         {% if redirect_field_value %}
           <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
         {% endif %}
 
-        <button type="submit" class="btn btn-primary btn-pill auth-primary-btn">
+        <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
           Create account
         </button>
       </form>
 
-      <div class="auth-footer">
-        Already have an account?
-        <a href="{% url 'account_login' %}">Sign in</a>
+      <div >
+        <p class="text-sm text-gray-600">
+            Already have an account?
+             <a href="{% url 'account_login' %}" class="text-green-600 hover:underline">Sign in</a> </p>
       </div>
+    
     </div>
   </div>
 {% endblock content %}

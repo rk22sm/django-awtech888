@@ -132,10 +132,10 @@ DATABASES = {
 }
 AUTH_USER_MODEL = "accounts.User"
 # Allauth settings
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_AUTHENTICATED_REDIRECT_URL = '/'  # Redirect after login
-LOGIN_REDIRECT_URL = '/profile/' # Redirect after successful login
+LOGIN_REDIRECT_URL = '/connectpro/' # Redirect after successful login
 ACCOUNT_LOGOUT_REDIRECT_URL = '/login'  # Redirect after logout
 LOGOUT_REDIRECT_URL = '/login'
 ACCOUNT_LOGIN_METHODS = {"email", "username"}
@@ -144,7 +144,7 @@ ACCOUNT_FORMS = {
     "login": "accounts.form.CustomLoginForm",
     "signup": "accounts.form.CustomSignupForm",
 }
-ACCOUNT_SIGNUP_REDIRECT_URL = '/profile/'
+ACCOUNT_SIGNUP_REDIRECT_URL = '/connectpro/'
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
@@ -163,6 +163,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'localhost'  # or smtp.gmail.com, etc.
+EMAIL_PORT = 1025          # or 587/465 for TLS/SSL
+EMAIL_USE_TLS = False
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
