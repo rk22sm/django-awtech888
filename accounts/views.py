@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from allauth.account.views import LoginView, SignupView,LogoutView
 from .form import CustomLoginForm, CustomSignupForm
 from django.urls import reverse_lazy
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 # Create your views here.
 def index(request):  
@@ -21,5 +23,6 @@ class CustomSignupView(SignupView):
 def forgot_pass(request):
     return HttpResponse("hello")
 
-class CustomLogoutView(LogoutView):
-    next_page = ''
+def Mylogout(request):
+    logout(request)
+    return redirect('accounts:index')

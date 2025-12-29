@@ -1,0 +1,13 @@
+{% extends "connectpro/base.html" %}
+
+{% block body_class %}auth-page{% endblock %}
+
+{% block content %}
+<div>
+    <h1>Welcome  to message, {{ user.username }}!</h1>
+    <p>Email: {{ user.email }}</p>
+    <p>Role: {{ user.role }}</p> <!-- Example custom field -->
+    
+</div>
+
+{%endblock content%}

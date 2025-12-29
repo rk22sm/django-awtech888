@@ -5,5 +5,5 @@ from django.shortcuts import render
 from django.http import HttpResponse  
 
 
-def home(request):  
-    return HttpResponse("Message page")
+def home(request):
+    return render(request, "message/home.html",{'user':request.user})

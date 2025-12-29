@@ -1,0 +1,92 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.5/dist/tailwind.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="h-screen bg-slate-300 bg-white">
+    <section class="container mx-auto flex flex-col">
+        <header class="border-b sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
+            <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+                <div class="flex items-center gap-2 ">
+                    <div class="w-8 h-8 rounded-lg bg-[#1dc9c9] flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-users w-5 h-5 text-primary-foreground text-white">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+
+                    </div>
+                    <span class="text-xl font-bold text-left">ConnectPro</span>
+                </div>
+                <div class="hidden md:flex items-center gap-6">
+                    <div class="inline-flex items-center justify-center ">
+                        <video width="25" height="25" preload="none" style="" autoplay="autoplay" loop="true"
+                            muted="muted" playsinline="" security-button="ca242f59a3bee">
+                            <source src="https://cdn-icons-mp4.flaticon.com/512/8716/8716890.mp4" type="video/mp4">
+                        </video>
+                        <a href="{% url 'connectpro:discover' %}" class="text-sm font-medium hover:text-primary ">Discover
+                        </a>
+
+                    </div>
+                    <div class="inline-flex items-center justify-center">
+
+                        <video width="25" height="25" preload="none" style="" autoplay="autoplay" loop="true"
+                            muted="muted" playsinline="" security-button="f12bc026fe59">
+                            <source src="https://cdn-icons-mp4.flaticon.com/512/8121/8121267.mp4" type="video/mp4">
+                        </video>
+                        <a href="{% url 'message:home' %}" class="text-sm font-medium hover:text-primary transition-colors">Messages</a>
+                    </div>
+                    <div class="inline-flex items-center justify-center">
+                        <video width="25" height="25" preload="none" style="" autoplay="autoplay" loop="true"
+                            muted="muted" playsinline="" security-button="c0fdabd5bf22c">
+                            <source src="https://cdn-icons-mp4.flaticon.com/512/8121/8121295.mp4" type="video/mp4">
+                        </video>
+                        <a href="{% url 'connectpro:profile' %}" class="text-sm font-medium hover:text-primary  transition-colors">Profile</a>
+
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <video width="40" height="40" preload="none" style="" autoplay="autoplay" loop="true" muted="muted"
+                        playsinline="" security-button="3cec984d7ad9c8">
+                        <source src="https://cdn-icons-mp4.flaticon.com/512/6172/6172532.mp4" type="video/mp4">
+                    </video>
+                    <div class="flex flex-col">
+                        <p class="font-blod font-semibold">{{user.username}}</p>
+                        <p class="text-xs text-gray-500">{{user.role}}</p>
+                    </div>
+
+                    <div>
+                        <p>
+                            <a href="{% url 'accounts:account_logout' %}">
+                                <video width="30" height="30" preload="none" style="" autoplay="autoplay" loop="true"
+                                    muted="muted" playsinline="" security-button="e140d6fe919628">
+                                    <source src="https://cdn-icons-mp4.flaticon.com/512/17905/17905742.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </a>
+                        </p>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </header>
+        {% block content %}{% endblock %}
+    </section>
+</body>
+
+</html>
