@@ -1,0 +1,144 @@
+{% extends "connectpro/base.html" %}
+
+{% block title %}MessageBox{% endblock title %}
+
+{% block content %}
+
+<main class="h-[calc(100vh-90px)] px-4 py-6 overflow-hidden">
+  <div class="grid h-full min-h-0 gap-4 rounded-3xl border border-slate-200 bg-white/80 backdrop-blur lg:grid-cols-[320px_1fr]">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="flex min-h-0 flex-col gap-4 border-b border-slate-200 p-4 lg:border-b-0 lg:border-r">
+
+      <div class="flex items-center justify-between">
+        <h2 class="text-xl font-bold">Messages</h2>
+        <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
+          {{ thread_details|length }} active
+        </span>
+      </div>
+
+      <input
+        type="text"
+        placeholder="Search conversations..."
+        class="w-full border border-slate-200 bg-white px-4 py-2.5 text-sm shadow-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 focus:outline-none"
+      />
+
+      <div class="flex-1 space-y-2 overflow-auto pr-1 soft-scrollbar">
+        {% for info in thread_details %}
+          {% with thread=info.thread other=info.other last=info.last_message %}
+            <a
+              href="{% url 'messages:inbox' %}?thread={{ thread.id }}"
+              class="flex gap-3 px-3 py-3 transition hover:bg-emerald-50
+              {% if active_thread and active_thread.id == thread.id %}
+                bg-emerald-50 border border-emerald-200
+              {% endif %}"
+            >
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-400 text-white font-semibold">
+                {{ other.username|slice:":1"|upper }}
+              </div>
+
+              <div class="min-w-0">
+                <div class="flex items-center gap-2">
+                  <span class="truncate font-semibold text-sm">{{ other.username }}</span>
+                  {% if last %}
+                    <span class="text-xs text-slate-400">{{ last.timestamp|timesince }} ago</span>
+                  {% endif %}
+                </div>
+
+                <div class="truncate text-xs text-slate-500">
+                  {{ last.content|default:"Start the conversation"|truncatewords:8 }}
+                </div>
+              </div>
+            </a>
+          {% endwith %}
+        {% empty %}
+          <p class="text-sm text-slate-500">No conversations yet.</p>
+        {% endfor %}
+      </div>
+    </aside>
+
+    <!-- CHAT AREA -->
+    <section class="grid h-full min-h-0 grid-rows-[auto_1fr_auto]">
+
+      <!-- HEADER -->
+      <div class="flex items-center gap-3 border-b border-slate-200 bg-white px-6 py-4">
+        {% if other_user %}
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-400 text-white font-semibold">
+            {{ other_user.username|slice:":1"|upper }}
+          </div>
+          <div>
+            <div class="font-semibold text-sm">{{ other_user.username }}</div>
+            <div class="text-xs text-slate-500">
+              {{ other_user.profile.headline|default:"Online" }}
+            </div>
+          </div>
+        {% else %}
+          <div class="text-sm text-slate-500">No active thread</div>
+        {% endif %}
+      </div>
+
+      <!-- MESSAGES -->
+      <div class="relative min-h-0">
+        <div id="chat-body"
+             class="h-full overflow-y-auto px-6 py-6 pb-24 space-y-3 soft-scrollbar">
+        </div>
+      </div>
+
+      <!-- INPUT -->
+      <form method="post" action="{% if active_thread %}{% url 'messages:send_message' active_thread.id %}{% else %}#{% endif %}"
+        class="flex gap-3 border-t border-slate-200 bg-white px-6 py-4"
+      >
+        {% csrf_token %}
+        <input
+          type="text"
+          name="message"
+          placeholder="Type a message..."
+          class="flex-1 rounded-full border px-4 py-3 text-sm focus:ring-emerald-200"
+          {% if not active_thread %}disabled{% endif %}
+        />
+        <button
+          class="rounded-full bg-emerald-500 px-4 py-3 text-white"
+          {% if not active_thread %}disabled{% endif %}
+        >
+          ➤
+        </button>
+      </form>
+
+    </section>
+  </div>
+</main>
+
+{% if active_thread %}
+  {{ messages_payload|json_script:"initial-messages" }}
+{% endif %}
+
+<script>
+  const chatBody = document.getElementById("chat-body");
+
+  function renderMessage(msg) {
+    const row = document.createElement("div");
+    row.className = `flex ${msg.is_me ? "justify-end" : "justify-start"}`;
+
+    row.innerHTML = `
+      <div class="max-w-[70%] rounded-2xl px-4 py-2 text-sm
+        ${msg.is_me
+          ? "bg-emerald-500 text-white rounded-br-sm"
+          : "bg-slate-100 text-slate-800 rounded-bl-sm"}">
+        <div>${msg.content}</div>
+        <div class="mt-1 text-[10px] opacity-70 text-right">
+          ${new Date(msg.timestamp).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}
+        </div>
+      </div>
+    `;
+    chatBody.appendChild(row);
+  }
+
+  const initial = document.getElementById("initial-messages");
+  if (initial) {
+    JSON.parse(initial.textContent).forEach(renderMessage);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+</script>
+
+
+{% endblock content %}

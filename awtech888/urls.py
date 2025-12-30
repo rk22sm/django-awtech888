@@ -24,7 +24,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     # Your app URLs
     path('', include(('accounts.urls'), namespace='accounts')),
-    path('message/',include('message.urls')),
+    path('messages/',include('message.urls')),
     path('connectpro/', include('connectpro.urls')),
 ]
 if settings.DEBUG:

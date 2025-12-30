@@ -34,6 +34,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     "crispy_forms",
     'crispy_bootstrap5',
+     #"accounts.apps.AccountsConfig",
     # other Django apps
     "tailwind",
     "theme",
@@ -53,7 +56,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     # local apps
-    'accounts',
+     'accounts',
     'message',
     'connectpro',
 ]
@@ -90,6 +93,12 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    }
+}
 
 SITE_ID = 1
 
@@ -128,6 +137,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'awtech888.wsgi.application'
+ASGI_APPLICATION = 'awtech888.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -157,6 +167,14 @@ ACCOUNT_FORMS = {
     "signup": "accounts.form.CustomSignupForm",
 }
 ACCOUNT_SIGNUP_REDIRECT_URL = '/connectpro/'
+
+
+TEMPLATES[0]["OPTIONS"]["context_processors"] += [
+    "accounts.context_processors.notifications",
+]
+
+
+
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
@@ -215,3 +233,9 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+
+#Goal I had signals for profile
+
+# Every time a User is created, automatically create a Profile
+# Every time a User is saved, ensure the Profile exists

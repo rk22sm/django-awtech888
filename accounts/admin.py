@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, Profile  # Ensure both User and Profile are imported
+from .models import User, Profile ,NotificationSettings ,Notification# Ensure both User and Profile are imported
 
 # Register User model with custom admin
 @admin.register(User)
@@ -18,3 +18,12 @@ class ProfileAdmin(admin.ModelAdmin):
         return obj.user.username
     get_username.admin_order_field = 'user'  # allows sorting by username
     get_username.short_description = 'Username'
+
+@admin.register(NotificationSettings)
+class NotificationAdmin(admin.ModelAdmin):
+    list_display = "user", "email_notifications", "push_notifications"
+
+@admin.register(Notification)
+class NotificationAdmin(admin.ModelAdmin):
+    list_display = ("user", "actor", "verb", "is_read", "created_at")
+    list_filter = ("is_read",)

@@ -14,7 +14,8 @@
 
 <body class="h-screen bg-slate-300 bg-white">
     <section class="container mx-auto flex flex-col">
-        <header class="border-b sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
+        <header
+            class="border-b sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
             <div class="container mx-auto px-4 h-16 flex items-center justify-between">
                 <div class="flex items-center gap-2 ">
                     <div class="w-8 h-8 rounded-lg bg-[#1dc9c9] flex items-center justify-center">
@@ -36,7 +37,8 @@
                             muted="muted" playsinline="" security-button="ca242f59a3bee">
                             <source src="https://cdn-icons-mp4.flaticon.com/512/8716/8716890.mp4" type="video/mp4">
                         </video>
-                        <a href="{% url 'connectpro:discover' %}" class="text-sm font-medium hover:text-primary ">Discover
+                        <a href="{% url 'connectpro:discover' %}"
+                            class="text-sm font-medium hover:text-primary ">Discover
                         </a>
 
                     </div>
@@ -46,14 +48,16 @@
                             muted="muted" playsinline="" security-button="f12bc026fe59">
                             <source src="https://cdn-icons-mp4.flaticon.com/512/8121/8121267.mp4" type="video/mp4">
                         </video>
-                        <a href="{% url 'message:home' %}" class="text-sm font-medium hover:text-primary transition-colors">Messages</a>
+                        <a href="{% url 'messages:inbox' %}"
+                            class="text-sm font-medium hover:text-primary transition-colors">Messages</a>
                     </div>
                     <div class="inline-flex items-center justify-center">
                         <video width="25" height="25" preload="none" style="" autoplay="autoplay" loop="true"
                             muted="muted" playsinline="" security-button="c0fdabd5bf22c">
                             <source src="https://cdn-icons-mp4.flaticon.com/512/8121/8121295.mp4" type="video/mp4">
                         </video>
-                        <a href="{% url 'connectpro:profile' %}" class="text-sm font-medium hover:text-primary  transition-colors">Profile</a>
+                        <a href="{% url 'connectpro:profile' %}"
+                            class="text-sm font-medium hover:text-primary  transition-colors">Profile</a>
 
                     </div>
                 </div>
@@ -66,6 +70,31 @@
                         <p class="font-blod font-semibold">{{user.username}}</p>
                         <p class="text-xs text-gray-500">{{user.role}}</p>
                     </div>
+                    <div class="relative inline-block text-left group">
+                        <button id="notif-btn" type="button"
+                            class="relative px-3 py-2 rounded bg-gray-200 hover:bg-gray-300">
+                            🔔
+                            <span id="notif-count"
+                                class="absolute -top-1 -right-1 bg-red-600 text-white rounded-full text-xs px-1">
+                                {{ notifications_unread_count }}
+                            </span>
+                        </button>
+
+                        <div id="notif-dropdown"
+                            class="hidden absolute right-0 mt-2 w-80 bg-white border border-gray-200 shadow-lg rounded-lg max-h-96 overflow-y-auto z-50 group-hover:block">
+                            <ul id="notif-list" class="divide-y divide-gray-200 p-2">
+                                {% for n in unread_notifications %}
+                                <li class="px-4 py-2 hover:bg-gray-100">
+                                    <strong>{{ n.actor__username }}</strong> {{ n.verb }}<br>
+                                    <small>{{ n.target|truncatechars:30 }}</small>
+                                </li>
+                                {% empty %}
+                                <li class="px-4 py-2 text-gray-400">No unread notifications</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
 
                     <div>
                         <p>
@@ -84,9 +113,46 @@
 
 
             </div>
+            <script>
+                const notifCount = document.getElementById("notif-count");
+                const notifList = document.getElementById("notif-list");
+
+                const wsScheme = window.location.protocol === "https:" ? "wss" : "ws";
+                const socket = new WebSocket(`${wsScheme}://${window.location.host}/ws/notifications/`);
+
+                socket.onmessage = function (e) {
+                    const data = JSON.parse(e.data);
+
+                    const li = document.createElement("li");
+                    li.classList.add("px-4", "py-2", "hover:bg-gray-100");
+                    li.innerHTML = `<strong>${data.actor}</strong> ${data.verb}<br><small>${data.target || ""}</small>`;
+                    notifList.prepend(li);
+
+                    notifCount.textContent = parseInt(notifCount.textContent || 0) + 1;
+                };
+
+            </script>
+
+
+
+            <script>
+                const initialNotifications = JSON.parse(document.getElementById("initial-notifications").textContent);
+
+                initialNotifications.forEach(n => {
+                    const li = document.createElement("li");
+                    li.classList.add("px-4", "py-2", "hover:bg-gray-100");
+                    li.innerHTML = `<strong>${n.actor}</strong> ${n.verb} <br><small>${n.target || ""}</small>`;
+                    document.getElementById("notif-list").prepend(li);
+                });
+            </script>
+
+            {{ notifications|json_script:"initial-notifications" }}
+
+
         </header>
         {% block content %}{% endblock %}
     </section>
 </body>
+
 
 </html>

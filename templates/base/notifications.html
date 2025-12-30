@@ -1,0 +1,20 @@
+{% extends "connectpro/base.html" %}
+
+{% block title %}Notifications{% endblock title %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Notifications</h1>
+
+<ul>
+    {% for n in notifications %}
+        <li class="{% if not n.is_read %}font-bold{% endif %}">
+            {{ n.actor }} {{ n.verb }} 
+            {% if n.target %}- {{ n.target }}{% endif %}
+            <small>({{ n.created_at|timesince }} ago)</small>
+            <a href="{% url 'accounts:notification_read' n.id %}">Mark as read</a>
+        </li>
+    {% empty %}
+        <li>No notifications yet.</li>
+    {% endfor %}
+</ul>
+{% endblock content %}
