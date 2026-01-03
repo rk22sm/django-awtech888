@@ -26,6 +26,8 @@ urlpatterns = [
     path('', include(('accounts.urls'), namespace='accounts')),
     path('messages/',include('message.urls')),
     path('connectpro/', include('connectpro.urls')),
+    path("payments/", include("payments.urls")),
+
 ]
 if settings.DEBUG:
     urlpatterns += static(

@@ -165,8 +165,8 @@
                                 <span>Real-time messaging</span>
                             </li>
                         </ul>
-                        <button
-                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full">Get
+                        <button data-plan="free" data-url="{% url 'payments:subscribe' %}" data-csrf="{{ csrf_token }}"
+                            class=" subscribe-btn inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full">Get
                             Started</button>
                     </div>
                 </div>
@@ -205,8 +205,9 @@
                                     ✓</div>
                                 <span>Advanced analytics</span>
                             </li>
-                        </ul><button
-                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 text-white bg-[#1dc9c9] w-full">Upgrade
+                        </ul><button data-plan="plus" data-url="{% url 'payments:subscribe' %}"
+                            data-csrf="{{ csrf_token }}"
+                            class="subscribe-btn inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 text-white bg-[#1dc9c9] w-full">Upgrade
                             to Plus</button>
                     </div>
                 </div>
@@ -242,8 +243,9 @@
                                     ✓</div>
                                 <span>Advanced features</span>
                             </li>
-                        </ul><button
-                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full">Go
+                        </ul><button data-plan="pro" data-url="{% url 'payments:subscribe' %}"
+                            data-csrf="{{ csrf_token }}"
+                            class="subscribe-btn inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full">Go
                             Pro</button>
 
                     </div>
@@ -322,5 +324,57 @@
 <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 </script>
+
+<script>
+    // static/payments/subscribe.js
+    document.querySelectorAll(".subscribe-btn").forEach(button => {
+        button.addEventListener("click", async () => {
+            const plan = button.dataset.plan;
+            const url = button.dataset.url;
+            const csrf = button.dataset.csrf;
+
+            try {
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": csrf
+                    },
+                    body: JSON.stringify({ plan })
+                });
+                if (response.status === 403 || response.status === 302) {
+                    alert("You must be logged in to subscribe!");
+                    window.location.href = "/accounts/login/?next=/payments/subscribe/";
+                    return;
+                }
+
+                // Always check response type before parsing
+                const text = await response.text();
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch {
+                    console.error("Invalid JSON response:", text);
+                    alert("Server error");
+                    return;
+                }
+
+                if (data.success) {
+                    alert(`Subscribed to ${plan.toUpperCase()}!`);
+                    location.reload();
+                } else {
+                    alert(data.error || "Something went wrong");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Network error");
+            }
+        });
+    });
+
+
+
+</script>
+
 
 {% endblock content %}

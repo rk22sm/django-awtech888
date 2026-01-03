@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     # local apps
-     'accounts',
+    'accounts',
     'message',
     'connectpro',
 ]

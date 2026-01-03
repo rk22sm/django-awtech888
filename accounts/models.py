@@ -12,8 +12,7 @@ class User(AbstractUser):
         choices=Role.choices,
         default=Role.DEVELOPER,
     )
-
-   
+    
     class Membership(models.TextChoices):
         FREE = "free", "Free"
         PLUS = "plus", "Plus"
@@ -23,6 +22,14 @@ class User(AbstractUser):
     membership_plan = models.CharField(
         max_length=10, choices=Membership.choices, default=Membership.FREE
     )
+    def daily_connection_limit(self):
+        """Limit based on membership tier."""
+        limits = {
+            "free": 2,
+            "plus": 5,
+            "pro": None,  # unlimited
+        }
+        return limits[self.membership_plan]
 
 
 
@@ -49,7 +56,7 @@ class Profile(models.Model):
     )
 
     location = models.CharField(max_length=100, blank=True)
-
+    profile_views = models.PositiveIntegerField(default=0)
     profile_picture = models.ImageField(
         upload_to="profile_pictures/",
         blank=True,

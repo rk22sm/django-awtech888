@@ -1,6 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User, Profile ,NotificationSettings ,Notification# Ensure both User and Profile are imported
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 # Register User model with custom admin
 @admin.register(User)
@@ -11,7 +14,7 @@ class CustomUserAdmin(UserAdmin):
 # Register Profile model
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('get_username', 'headline', 'location', 'created_at')
+    list_display = ('get_username', 'headline', 'location', 'created_at','profile_views')
     list_filter = ('location', 'created_at')
 
     def get_username(self, obj):
